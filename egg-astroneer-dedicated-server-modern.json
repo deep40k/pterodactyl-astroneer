@@ -10,7 +10,7 @@
   "description": "Astroneer dedicated server for Pterodactyl using a custom Debian image with GE-Proton, Xvfb, SteamCMD, and a bootstrap script that writes current Astroneer config into /home/container.",
   "features": null,
   "docker_images": {
-    "ghcr.io/REPLACE_ME/astroneer-ptero:latest": "ghcr.io/REPLACE_ME/astroneer-ptero:latest"
+    "ghcr.io/deep40k/astroneer-ptero:latest": "ghcr.io/deep40k/astroneer-ptero:latest"
   },
   "file_denylist": [],
   "startup": "/usr/local/bin/astroneer-start",
