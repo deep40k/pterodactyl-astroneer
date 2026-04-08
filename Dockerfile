@@ -1,5 +1,5 @@
 FROM amd64/debian:trixie
-
+LABEL org.opencontainers.image.source="https://github.com/deep40k/pterodactyl-astroneer"
 ENV DEBIAN_FRONTEND=noninteractive \
     LANG=en_US.UTF-8 \
     LC_ALL=en_US.UTF-8
