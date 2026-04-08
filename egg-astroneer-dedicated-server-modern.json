@@ -1,0 +1,122 @@
+{
+  "_comment": "Custom Astroneer egg for Pterodactyl using a custom Debian+GE-Proton runtime image. Build the matching Dockerfile and push it to your registry, then replace the docker_images value below.",
+  "meta": {
+    "version": "PTDL_v2",
+    "update_url": null
+  },
+  "exported_at": "2026-04-08T21:30:00+00:00",
+  "name": "Astroneer Dedicated Server (Custom Proton Runtime)",
+  "author": "OpenAI",
+  "description": "Astroneer dedicated server for Pterodactyl using a custom Debian image with GE-Proton, Xvfb, SteamCMD, and a bootstrap script that writes current Astroneer config into /home/container.",
+  "features": null,
+  "docker_images": {
+    "ghcr.io/REPLACE_ME/astroneer-ptero:latest": "ghcr.io/REPLACE_ME/astroneer-ptero:latest"
+  },
+  "file_denylist": [],
+  "startup": "/usr/local/bin/astroneer-start",
+  "config": {
+    "files": "{}",
+    "startup": "{\r\n    \"done\": \"ASTRONEER_BOOTSTRAP_DONE\"\r\n}",
+    "logs": "{}",
+    "stop": "^C"
+  },
+  "scripts": {
+    "installation": {
+      "script": "#!/bin/bash\nset -euo pipefail\nmkdir -p /mnt/server\necho 'This egg uses a custom runtime image. No separate install step is required here.'\n",
+      "container": "ghcr.io/ptero-eggs/installers:debian",
+      "entrypoint": "bash"
+    }
+  },
+  "variables": [
+    {
+      "name": "Server Name",
+      "description": "Displayed server name.",
+      "env_variable": "SERVER_NAME",
+      "default_value": "Pterodactyl Astroneer Server",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|string|max:80",
+      "field_type": "text"
+    },
+    {
+      "name": "Server Password",
+      "description": "Server password required by clients.",
+      "env_variable": "SERVER_PWD",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "nullable|string|max:100",
+      "field_type": "text"
+    },
+    {
+      "name": "Owner Name",
+      "description": "Steam username that should become the server owner/admin on first join.",
+      "env_variable": "OWNER_NAME",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|string|max:100",
+      "field_type": "text"
+    },
+    {
+      "name": "Public IP",
+      "description": "Public IPv4 address clients should use. Leave blank to auto-detect via ipify.",
+      "env_variable": "PUBLIC_IP",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "nullable|string|max:255",
+      "field_type": "text"
+    },
+    {
+      "name": "Domain Name",
+      "description": "Optional FQDN to resolve to IPv4 if Public IP auto-detection is unsuitable.",
+      "env_variable": "DOMAIN_NAME",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "nullable|string|max:255",
+      "field_type": "text"
+    },
+    {
+      "name": "Server Port",
+      "description": "Astroneer game port.",
+      "env_variable": "SERVER_PORT",
+      "default_value": "8777",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|integer|between:1025,65535",
+      "field_type": "text"
+    },
+    {
+      "name": "Auto Update",
+      "description": "Run SteamCMD app_update on startup. 1=yes, 0=no.",
+      "env_variable": "AUTO_UPDATE",
+      "default_value": "1",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|boolean",
+      "field_type": "text"
+    },
+    {
+      "name": "Disable Encryption",
+      "description": "Legacy troubleshooting mode only. 0=keep encryption enabled, 1=disable it.",
+      "env_variable": "DISABLE_ENCRYPTION",
+      "default_value": "0",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|boolean",
+      "field_type": "text"
+    },
+    {
+      "name": "Active Save Name",
+      "description": "Save name without the timestamp suffix. Default SAVE_1.",
+      "env_variable": "SAVE_NAME",
+      "default_value": "SAVE_1",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|string|max:100",
+      "field_type": "text"
+    }
+  ]
+}
