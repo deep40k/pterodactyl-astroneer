@@ -25,10 +25,3 @@ This repository contains:
 ## Goal
 
 The stock Astroneer Pterodactyl egg has had runtime issues with Proton-based headless startup. This project is intended to provide a more reliable path by using a custom image and updated startup flow.
-
-## Build and publish to GHCR
-
-Make sure your `Dockerfile` includes this label near the top:
-
-```dockerfile
-LABEL org.opencontainers.image.source="https://github.com/deep40k/pterodactyl-astroneer"
